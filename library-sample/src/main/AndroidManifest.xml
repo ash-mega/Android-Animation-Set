@@ -1,1 +1,8 @@
-<manifest package="org.ashtray.library_sample"/>
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="org.ashtray.librarysample">
+	<application>
+		<activity android:name=".BaseActivity"/>
+	</application>
+</manifest>

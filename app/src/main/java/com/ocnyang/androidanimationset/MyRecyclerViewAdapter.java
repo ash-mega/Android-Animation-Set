@@ -1,5 +1,6 @@
 package com.ocnyang.androidanimationset;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -32,65 +33,65 @@ import com.ocnyang.viewanimation.ViewAnimationActivity;
 
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
-
+    
     private final int[] mIntArray;
     private final String[] mStringArray;
-    Context mContext;
-
-    public MyRecyclerViewAdapter(Context context, int[] intArray, String[] stringArray) {
+    private Context mContext;
+    
+    MyRecyclerViewAdapter(Context context,int[] intArray,String[] stringArray) {
         mContext = context;
         mIntArray = intArray;
         mStringArray = stringArray;
     }
-
-
+    
+    
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext)
-                .inflate(R.layout.item_recycler, parent, false));
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,int viewType) {
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_recycler,parent,false));
     }
-
+    
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder,int position) {
         holder.itemNameTv.setText(mStringArray[position]);
-
+        
         Uri uri = Uri.parse("res://" + mContext.getPackageName() + "/" + mIntArray[position]);
         DraweeController build = Fresco.newDraweeControllerBuilder()
                 .setUri(uri)
                 .setAutoPlayAnimations(true)
                 .build();
         holder.itemImg.setController(build);
-
+        
         holder.itemView.setOnClickListener(new View.OnClickListener() {
+            
             @Override
             public void onClick(View v) {
-                switch (position) {
+                switch (holder.getAdapterPosition()) {
                     case 0:
-                        mContext.startActivity(new Intent(mContext, ViewAnimationActivity.class));
+                        to(ViewAnimationActivity.class);
                         break;
                     case 1:
-                        mContext.startActivity(new Intent(mContext, DrawableAnimationActivity.class));
+                        to(DrawableAnimationActivity.class);
                         break;
                     case 2:
-                        mContext.startActivity(new Intent(mContext, PropertyAnimationActivity.class));
+                        to(PropertyAnimationActivity.class);
                         break;
                     case 3:
-                        mContext.startActivity(new Intent(mContext, TouchFeedbackActivity.class));
+                        to(TouchFeedbackActivity.class);
                         break;
                     case 4:
-                        mContext.startActivity(new Intent(mContext, RevealAnimationActivity.class));
+                        to(RevealAnimationActivity.class);
                         break;
                     case 5:
-                        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(((MainActivity) mContext), null);
-                        Intent intent = new Intent(mContext, TransitionAnimationActivity.class);
-                        mContext.startActivity(intent, activityOptionsCompat.toBundle());
+                        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(((MainActivity)mContext),null);
+                        Intent intent = new Intent(mContext,TransitionAnimationActivity.class);
+                        mContext.startActivity(intent,activityOptionsCompat.toBundle());
                         break;
                     case 6:
-                        mContext.startActivity(new Intent(mContext, StateAnimationActivity.class));
+                        to(StateAnimationActivity.class);
                         break;
                     case 7:
-                        mContext.startActivity(new Intent(mContext, VectorAnimationActivity.class));
+                        to(VectorAnimationActivity.class);
                         break;
                     default:
                         break;
@@ -98,17 +99,21 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             }
         });
     }
-
+    
+    private <T extends Activity> void to(Class<T> target) {
+        mContext.startActivity(new Intent(mContext,target));
+    }
+    
     @Override
     public int getItemCount() {
         return mStringArray != null ? mStringArray.length : 0;
     }
-
+    
     class ViewHolder extends RecyclerView.ViewHolder {
         View itemView;
         TextView itemNameTv;
         SimpleDraweeView itemImg;
-
+        
         ViewHolder(View view) {
             super(view);
             itemView = view.findViewById(R.id.view_content);

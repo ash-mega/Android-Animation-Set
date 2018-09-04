@@ -1,4 +1,4 @@
-package org.ashtray.library_sample;
+package org.ashtray.librarysample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

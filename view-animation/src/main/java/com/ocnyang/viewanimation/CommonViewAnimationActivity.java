@@ -37,7 +37,7 @@ public class CommonViewAnimationActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = ((Toolbar) findViewById(R.id.toolbar));
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -77,6 +77,7 @@ public class CommonViewAnimationActivity extends AppCompatActivity {
             }
         }
         animation.setAnimationListener(new Animation.AnimationListener() {
+            
             @Override
             public void onAnimationStart(Animation animation) {
                 Log.d(TAG, animationType + " start;");

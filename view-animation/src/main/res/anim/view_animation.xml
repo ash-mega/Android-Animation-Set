@@ -15,8 +15,8 @@
 		android:fillAfter="true"
 		android:fillBefore="false"
 		android:fromDegrees="0"
-		android:pivotX="10%"
-		android:pivotY="10%"
+		android:pivotX="50%"
+		android:pivotY="50%"
 		android:repeatCount="1"
 		android:repeatMode="reverse"
 		android:toDegrees="360"/>

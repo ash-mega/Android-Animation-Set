@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 public class PopupWindowViewAnimationActivity extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class PopupWindowViewAnimationActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = ((Toolbar) findViewById(R.id.toolbar));
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -46,7 +47,14 @@ public class PopupWindowViewAnimationActivity extends AppCompatActivity {
         if (mImgPopupWindow == null) {
             ImageView view = new ImageView(this);
             view.setImageDrawable(getDrawable(R.drawable.img_popup));
-
+            view.setOnClickListener(new View.OnClickListener() {
+        
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),"#@!#!@#@!",Toast.LENGTH_SHORT).show();
+                }
+            });
+            
             mImgPopupWindow = new PopupWindow(view, anchor.getMeasuredWidth(), anchor.getMeasuredWidth());
             mImgPopupWindow.setAnimationStyle(R.style.popup_anim_style);
         }
